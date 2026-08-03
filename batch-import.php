@@ -24,7 +24,9 @@ class WBIP_Plugin {
     }
 
     public function init() {
-        // Load plugin components
+    require_once WBIP_PATH . 'includes/class-loader.php';
+
+    WBIP_Loader::init();
     }
 }
 
