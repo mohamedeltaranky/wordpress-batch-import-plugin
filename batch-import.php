@@ -1,33 +1,20 @@
 <?php
 /**
- * Plugin Name: WordPress Batch Import Plugin
+ * Plugin Name: WordPress Admin Starter
  * Plugin URI: https://github.com/mohamedeltaranky/wordpress-batch-import-plugin
- * Description: High-performance batch import plugin for WordPress with AJAX queue processing and resume support.
+ * Description: Starter plugin for learning professional WordPress plugin development.
  * Version: 1.0.0
  * Author: Mohamed Khalaf Mohamed
  * License: MIT
- * Requires PHP: 8.0
+ * Text Domain: wbip
  */
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+defined('ABSPATH') || exit;
 
 define('WBIP_VERSION', '1.0.0');
 define('WBIP_PATH', plugin_dir_path(__FILE__));
 define('WBIP_URL', plugin_dir_url(__FILE__));
 
-class WBIP_Plugin {
+require_once WBIP_PATH . 'includes/class-loader.php';
 
-    public function __construct() {
-        add_action('plugins_loaded', [$this, 'init']);
-    }
-
-    public function init() {
-    require_once WBIP_PATH . 'includes/class-loader.php';
-
-    WBIP_Loader::init();
-    }
-}
-
-new WBIP_Plugin();
+WBIP_Loader::init();

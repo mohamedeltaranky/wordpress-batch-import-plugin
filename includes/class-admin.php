@@ -1,63 +1,35 @@
 <?php
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+defined('ABSPATH') || exit;
 
 class WBIP_Admin
 {
     public function __construct()
     {
-        add_action('admin_menu', [$this, 'register_menu']);
-        add_action('admin_enqueue_scripts', [$this, 'enqueue_assets']);
+        add_action('admin_menu', [$this, 'registerMenu']);
     }
 
-    public function register_menu()
+    public function registerMenu(): void
     {
         add_menu_page(
-            'WP Queue Importer',
-            'WP Queue Importer',
+            'WordPress Admin Starter',
+            'WP Starter',
             'manage_options',
-            'wp-queue-importer',
-            [$this, 'render_page'],
-            'dashicons-database-import',
-            30
+            'wbip-starter',
+            [$this, 'renderPage'],
+            'dashicons-admin-tools',
+            60
         );
     }
 
-    public function enqueue_assets($hook)
+    public function renderPage(): void
     {
-        if ($hook !== 'toplevel_page_wp-queue-importer') {
-            return;
-        }
+        ?>
+        <div class="wrap">
+            <h1>🚀 WordPress Admin Starter</h1>
 
-        wp_enqueue_style(
-            'wbip-admin',
-            WBIP_URL . 'assets/css/admin.css',
-            [],
-            WBIP_VERSION
-        );
-
-        wp_enqueue_script(
-            'wbip-admin',
-            WBIP_URL . 'assets/js/admin.js',
-            ['jquery'],
-            WBIP_VERSION,
-            true
-        );
-
-        wp_localize_script(
-            'wbip-admin',
-            'wbip',
-            [
-                'ajax_url' => admin_url('admin-ajax.php'),
-                'nonce'    => wp_create_nonce('wbip_nonce'),
-            ]
-        );
-    }
-
-    public function render_page()
-    {
-        require WBIP_PATH . 'templates/admin-page.php';
+            <p>If you can read this page, the plugin is working correctly.</p>
+        </div>
+        <?php
     }
 }

@@ -1,12 +1,10 @@
 <?php
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+defined('ABSPATH') || exit;
 
 class WBIP_Loader
 {
-    public static function init()
+    public static function init(): void
     {
         require_once WBIP_PATH . 'includes/class-admin.php';
 
